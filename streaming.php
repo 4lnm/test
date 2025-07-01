@@ -21,11 +21,27 @@ else{
     $dub = "sub";
 };
 
-$getEpisode = file_get_contents("$api/getEpisode/$url");
-$getEpisode = json_decode($getEpisode, true);
-if(isset($getEpisode['error'])){
-    header('Location: /');
-};
+$getEpisode = @file_get_contents("$api/getEpisode/$url");
+if ($getEpisode) {
+    $getEpisode = json_decode($getEpisode, true);
+    if(isset($getEpisode['error']) || !$getEpisode){
+        header('Location: /');
+        exit;
+    }
+} else {
+    // Fallback - create basic episode structure
+    $getEpisode = [
+        'animeNameWithEP' => 'Episode not found',
+        'ep_num' => '1',
+        'ep_download' => '',
+        'anime_info' => $animeID,
+        'video' => '',
+        'prevEpText' => '',
+        'nextEpText' => '',
+        'prevEpLink' => '',
+        'nextEpLink' => ''
+    ];
+}
 
 
 
