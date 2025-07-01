@@ -1,0 +1,921 @@
+<!doctype html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  itemscope=""
+  itemtype="http://schema.org/WebPage"
+  lang="en-US"
+>
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <title>Watch One Piece Episode 1 on AnimeZia | Chromecast Available</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Watch One Piece Episode 1 on AnimeZia" />
+    <meta itemprop="image" content="/logo.png" />
+    <meta property="og:site_name" content="AnimeZia" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo.png" />
+    <meta
+      name="keywords"
+      content="crunchyroll,9anime,gogoanime,aniwatch,animesuge"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      type="text/css"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="./files/css/style.css" />
+    <style>
+      /* Custom styles for the streaming page */
+      .streaming-container {
+        background: #0f0f23;
+        color: #fff;
+        min-height: 100vh;
+      }
+
+      .header-main {
+        background: #1a1a2e;
+        padding: 10px 0;
+        border-bottom: 2px solid #16213e;
+      }
+
+      .logo-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-header img {
+        height: 40px;
+      }
+
+      .logo-header h1 {
+        color: #fff;
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-menu a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .nav-menu a:hover {
+        background: #16213e;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .anis-cover-wrap {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .anis-cover {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px) brightness(0.3);
+      }
+
+      .player-frame {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        background: #000;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .player-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .loading-relative {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .loading {
+        display: flex;
+        gap: 5px;
+      }
+
+      .loading div {
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border-radius: 50%;
+        animation: loading 1.4s infinite ease-in-out both;
+      }
+
+      .loading .span1 {
+        animation-delay: -0.32s;
+      }
+      .loading .span2 {
+        animation-delay: -0.16s;
+      }
+
+      @keyframes loading {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+
+      .player-controls {
+        background: #1a1a2e;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn {
+        background: #16213e;
+        border: 1px solid #333;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s;
+      }
+
+      .btn:hover {
+        background: #0f4c75;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .btn i {
+        margin-right: 5px;
+      }
+
+      .pc-right {
+        margin-left: auto;
+        display: flex;
+        gap: 10px;
+      }
+
+      .server-section {
+        background: #1a1a2e;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .server-section h3 {
+        color: #fff;
+        margin-bottom: 15px;
+      }
+
+      .servers-list {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn-server {
+        background: #16213e;
+        border: 1px solid #333;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-server.active {
+        background: #0f4c75;
+        border-color: #0f4c75;
+      }
+
+      .btn-server:hover {
+        background: #0f4c75;
+      }
+
+      .episodes-section {
+        background: #1a1a2e;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .episode-search {
+        margin-bottom: 20px;
+      }
+
+      .episode-search input {
+        background: #16213e;
+        border: 1px solid #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      .episodes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .episode-item {
+        background: #16213e;
+        border: 1px solid #333;
+        padding: 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #fff;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .episode-item:hover {
+        background: #0f4c75;
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .episode-item.active {
+        background: #0f4c75;
+        border-color: #0f4c75;
+      }
+
+      .episode-number {
+        background: #0f4c75;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-weight: bold;
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .anime-info {
+        background: #1a1a2e;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .anime-poster {
+        width: 150px;
+        height: 200px;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-right: 20px;
+        flex-shrink: 0;
+      }
+
+      .anime-poster img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .anime-details h2 {
+        color: #fff;
+        margin-bottom: 15px;
+      }
+
+      .anime-stats {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+
+      .stat-badge {
+        background: #16213e;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+        color: #fff;
+      }
+
+      .anime-description {
+        color: #ccc;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .rating-section {
+        background: #16213e;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .rating-display {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .rating-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .breadcrumb {
+        background: transparent;
+        padding: 10px 0;
+        margin-bottom: 20px;
+      }
+
+      .breadcrumb-item a {
+        color: #ccc;
+        text-decoration: none;
+      }
+
+      .breadcrumb-item.active {
+        color: #fff;
+      }
+
+      .comments-section {
+        background: #1a1a2e;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+      }
+
+      @media (max-width: 768px) {
+        .pc-right {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+
+        .anime-info .d-flex {
+          flex-direction: column;
+        }
+
+        .anime-poster {
+          margin-right: 0;
+          margin-bottom: 20px;
+          align-self: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="streaming-container">
+    <!-- Header -->
+    <header class="header-main">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="logo-header">
+            <img
+              src="https://cdnzia.pages.dev/images/logo.webp"
+              alt="AnimeZia"
+            />
+            <h1>AnimeZia</h1>
+          </div>
+          <nav>
+            <ul class="nav-menu d-flex">
+              <li><a href="#" onclick="showMessage('Home')">Home</a></li>
+              <li><a href="#" onclick="showMessage('Anime List')">Anime</a></li>
+              <li><a href="#" onclick="showMessage('Popular')">Popular</a></li>
+              <li><a href="#" onclick="showMessage('Movies')">Movies</a></li>
+              <li><a href="#" onclick="showMessage('Random')">Random</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mt-4">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#" onclick="showMessage('Home')">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" onclick="showMessage('Anime')">Anime</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#" onclick="showAnime('One Piece')">One Piece</a>
+          </li>
+          <li class="breadcrumb-item active">Episode 1</li>
+        </ol>
+      </nav>
+
+      <!-- Background Cover -->
+      <div class="anis-cover-wrap">
+        <div
+          class="anis-cover"
+          style="
+            background-image: url(&quot;https://gogocdn.net/images/anime/One-piece.jpg&quot;);
+          "
+        ></div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Video Player -->
+          <div class="player-frame" id="player-container">
+            <div class="loading-relative" id="embed-loading">
+              <div class="loading">
+                <div class="span1"></div>
+                <div class="span2"></div>
+                <div class="span3"></div>
+              </div>
+            </div>
+            <iframe
+              id="video-player"
+              src=""
+              frameborder="0"
+              scrolling="no"
+              allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture"
+              allowfullscreen="true"
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+              style="display: none"
+            ></iframe>
+          </div>
+
+          <!-- Player Controls -->
+          <div class="player-controls">
+            <a href="#" class="btn" onclick="toggleFullscreen()"
+              ><i class="fas fa-expand"></i>Expand</a
+            >
+            <a href="#" class="btn" onclick="toggleLights()"
+              ><i class="fas fa-lightbulb"></i>Lights</a
+            >
+            <a href="#" class="btn" onclick="downloadEpisode()"
+              ><i class="fas fa-download"></i>Download</a
+            >
+
+            <div class="pc-right">
+              <a href="#" class="btn" onclick="previousEpisode()"
+                ><i class="fas fa-backward"></i>Prev</a
+              >
+              <a href="#" class="btn" onclick="nextEpisode()"
+                ><i class="fas fa-forward"></i>Next</a
+              >
+              <a href="#" class="btn" onclick="addToWatchlist()"
+                ><i class="fas fa-plus"></i>Watchlist</a
+              >
+            </div>
+          </div>
+
+          <!-- Server Selection -->
+          <div class="server-section">
+            <h3><i class="fas fa-server"></i> Servers</h3>
+            <div class="mb-3">
+              <strong
+                >Currently watching Episode
+                <span id="current-episode">1</span></strong
+              ><br />
+              <span>Switch to alternate servers in case of error.</span>
+            </div>
+            <div class="servers-list">
+              <button
+                class="btn-server active"
+                onclick="switchServer(1, 'AnimeZia')"
+              >
+                AnimeZia
+              </button>
+              <button
+                class="btn-server"
+                onclick="switchServer(2, 'AnimeZia V2')"
+              >
+                AnimeZia V2
+              </button>
+              <button
+                class="btn-server"
+                onclick="switchServer(3, 'GogoServer')"
+              >
+                GogoServer
+              </button>
+              <button
+                class="btn-server"
+                onclick="switchServer(4, 'Backup Server')"
+              >
+                Backup
+              </button>
+            </div>
+          </div>
+
+          <!-- Episodes List -->
+          <div class="episodes-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3>Episodes</h3>
+              <div class="episode-search">
+                <input
+                  type="text"
+                  id="episode-search"
+                  placeholder="Search Episode #"
+                  onkeyup="searchEpisodes()"
+                />
+              </div>
+            </div>
+            <div class="episodes-grid" id="episodes-container">
+              <!-- Episodes will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Anime Information -->
+          <div class="anime-info">
+            <div class="d-flex">
+              <div class="anime-poster">
+                <img
+                  src="https://gogocdn.net/images/anime/One-piece.jpg"
+                  alt="One Piece"
+                />
+              </div>
+              <div class="anime-details flex-fill">
+                <h2>One Piece</h2>
+                <div class="anime-stats">
+                  <span class="stat-badge">HD</span>
+                  <span class="stat-badge">SUB</span>
+                  <span class="stat-badge">VIEWS: 2,547,892</span>
+                  <span class="stat-badge">Ongoing</span>
+                  <span class="stat-badge">1999</span>
+                  <span class="stat-badge">TV Series</span>
+                </div>
+                <div class="anime-description">
+                  One Piece is a story about Monkey D. Luffy, who wants to
+                  become a sea-robber. In a world mystical, there have a
+                  mystical fruit whom eat will have a special power but also
+                  have greatest weakness. Monkey ate Gum-Gum Fruit which gave
+                  him a strange power but he can NEVER swim.
+                </div>
+                <a href="#" class="btn" onclick="showAnime('One Piece')"
+                  ><i class="fas fa-book-open"></i> View Details</a
+                >
+
+                <!-- Rating Section -->
+                <div class="rating-section">
+                  <div class="rating-display">
+                    <strong
+                      ><i class="fas fa-star text-warning"></i>
+                      <span id="rating">8.7</span></strong
+                    >
+                    <small>(<span id="vote-count">15,423</span> Voted)</small>
+                    <span class="ml-auto">Vote now</span>
+                  </div>
+                  <p>What do you think about this anime?</p>
+                  <div class="rating-buttons">
+                    <button
+                      class="btn"
+                      onclick="voteAnime('dislike')"
+                      style="width: 48%"
+                    >
+                      <i class="far fa-thumbs-down" id="dislike-icon"></i>
+                      <span id="dislike-text">Dislike</span>
+                    </button>
+                    <button
+                      class="btn"
+                      onclick="voteAnime('like')"
+                      style="width: 48%"
+                    >
+                      <i class="far fa-thumbs-up" id="like-icon"></i>
+                      <span id="like-text">Like</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="comments-section">
+        <h3>Comments</h3>
+        <p>
+          Comments functionality would be integrated with Disqus or a custom
+          comment system in the full version.
+        </p>
+        <button class="btn" onclick="showMessage('Comments')">
+          Load Comments
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Mock data for episodes
+      const animeData = {
+        currentEpisode: 1,
+        totalEpisodes: 1000,
+        animeTitle: "One Piece",
+        episodes: [],
+      };
+
+      // Generate episodes data
+      for (let i = 1; i <= animeData.totalEpisodes; i++) {
+        animeData.episodes.push({
+          number: i,
+          title: `Episode ${i}`,
+          thumbnail: "https://gogocdn.net/images/anime/One-piece.jpg",
+          servers: [
+            { name: "AnimeZia", url: `https://example.com/player/ep${i}` },
+            { name: "AnimeZia V2", url: `https://example.com/player2/ep${i}` },
+            { name: "GogoServer", url: `https://example.com/gogo/ep${i}` },
+            { name: "Backup", url: `https://example.com/backup/ep${i}` },
+          ],
+        });
+      }
+
+      let currentServer = 1;
+      let lightsOff = false;
+      let isFullscreen = false;
+
+      // Initialize the page
+      $(document).ready(function () {
+        generateEpisodesList();
+        loadEpisode(animeData.currentEpisode);
+        setTimeout(() => {
+          hideLoading();
+        }, 2000);
+      });
+
+      function generateEpisodesList() {
+        const container = $("#episodes-container");
+        container.empty();
+
+        animeData.episodes.forEach((episode) => {
+          const isActive =
+            episode.number === animeData.currentEpisode ? "active" : "";
+          const episodeHtml = `
+          <a href="#" class="episode-item ${isActive}" onclick="selectEpisode(${episode.number})" data-episode="${episode.number}">
+            <div class="episode-number">${episode.number}</div>
+            <div class="episode-info">
+              <div class="episode-title">${episode.title}</div>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-play"></i>
+            </div>
+          </a>
+        `;
+          container.append(episodeHtml);
+        });
+      }
+
+      function selectEpisode(episodeNumber) {
+        animeData.currentEpisode = episodeNumber;
+        $("#current-episode").text(episodeNumber);
+
+        // Update active episode
+        $(".episode-item").removeClass("active");
+        $(`.episode-item[data-episode="${episodeNumber}"]`).addClass("active");
+
+        loadEpisode(episodeNumber);
+        showLoading();
+        setTimeout(hideLoading, 1500);
+      }
+
+      function loadEpisode(episodeNumber) {
+        const episode = animeData.episodes[episodeNumber - 1];
+        if (episode) {
+          const serverUrl = episode.servers[currentServer - 1].url;
+          $("#video-player").attr(
+            "src",
+            `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1`,
+          ); // Demo video
+          updatePageTitle(episodeNumber);
+        }
+      }
+
+      function updatePageTitle(episodeNumber) {
+        document.title = `Watch ${animeData.animeTitle} Episode ${episodeNumber} on AnimeZia`;
+      }
+
+      function switchServer(serverIndex, serverName) {
+        currentServer = serverIndex;
+        $(".btn-server").removeClass("active");
+        $(`.btn-server:contains('${serverName}')`).addClass("active");
+
+        showLoading();
+        setTimeout(() => {
+          loadEpisode(animeData.currentEpisode);
+          hideLoading();
+          showMessage(`Switched to ${serverName} server`);
+        }, 1000);
+      }
+
+      function searchEpisodes() {
+        const searchTerm = $("#episode-search").val().toLowerCase();
+        $(".episode-item").each(function () {
+          const episodeNumber = $(this).data("episode").toString();
+          if (episodeNumber.includes(searchTerm) || searchTerm === "") {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+
+      function previousEpisode() {
+        if (animeData.currentEpisode > 1) {
+          selectEpisode(animeData.currentEpisode - 1);
+          scrollToEpisode(animeData.currentEpisode);
+        } else {
+          showMessage("This is the first episode");
+        }
+      }
+
+      function nextEpisode() {
+        if (animeData.currentEpisode < animeData.totalEpisodes) {
+          selectEpisode(animeData.currentEpisode + 1);
+          scrollToEpisode(animeData.currentEpisode);
+        } else {
+          showMessage("This is the latest episode");
+        }
+      }
+
+      function scrollToEpisode(episodeNumber) {
+        const episodeElement = $(
+          `.episode-item[data-episode="${episodeNumber}"]`,
+        );
+        if (episodeElement.length) {
+          $("#episodes-container").animate(
+            {
+              scrollTop:
+                episodeElement.offset().top -
+                $("#episodes-container").offset().top +
+                $("#episodes-container").scrollTop(),
+            },
+            500,
+          );
+        }
+      }
+
+      function toggleFullscreen() {
+        const player = $("#player-container")[0];
+
+        if (!isFullscreen) {
+          if (player.requestFullscreen) {
+            player.requestFullscreen();
+          } else if (player.webkitRequestFullscreen) {
+            player.webkitRequestFullscreen();
+          } else if (player.mozRequestFullScreen) {
+            player.mozRequestFullScreen();
+          }
+          isFullscreen = true;
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          }
+          isFullscreen = false;
+        }
+      }
+
+      function toggleLights() {
+        lightsOff = !lightsOff;
+        if (lightsOff) {
+          $("body").css("background", "#000");
+          $(".container > *:not(.player-frame):not(.player-controls)").css(
+            "opacity",
+            "0.3",
+          );
+          showMessage("Lights turned off");
+        } else {
+          $("body").css("background", "#0f0f23");
+          $(".container > *").css("opacity", "1");
+          showMessage("Lights turned on");
+        }
+      }
+
+      function downloadEpisode() {
+        showMessage(
+          `Download link for ${animeData.animeTitle} Episode ${animeData.currentEpisode} would be generated here`,
+        );
+      }
+
+      function addToWatchlist() {
+        showMessage(
+          `${animeData.animeTitle} Episode ${animeData.currentEpisode} added to watchlist!`,
+        );
+      }
+
+      function voteAnime(type) {
+        if (type === "like") {
+          $("#like-icon").removeClass("far").addClass("fas");
+          $("#dislike-icon").removeClass("fas").addClass("far");
+          $("#like-text").text("Liked");
+          $("#dislike-text").text("Dislike");
+          showMessage("You liked this anime!");
+        } else {
+          $("#dislike-icon").removeClass("far").addClass("fas");
+          $("#like-icon").removeClass("fas").addClass("far");
+          $("#dislike-text").text("Disliked");
+          $("#like-text").text("Like");
+          showMessage("You disliked this anime!");
+        }
+
+        // Update vote count
+        const currentVotes = parseInt($("#vote-count").text().replace(",", ""));
+        $("#vote-count").text((currentVotes + 1).toLocaleString());
+      }
+
+      function showLoading() {
+        $("#embed-loading").show();
+        $("#video-player").hide();
+      }
+
+      function hideLoading() {
+        $("#embed-loading").hide();
+        $("#video-player").show();
+      }
+
+      function showMessage(message) {
+        alert(`Demo: ${message}`);
+      }
+
+      function showAnime(animeName) {
+        showMessage(`This would show the anime details page for ${animeName}`);
+      }
+
+      // Keyboard shortcuts
+      $(document).keydown(function (e) {
+        switch (e.which) {
+          case 37: // left arrow
+            previousEpisode();
+            break;
+          case 39: // right arrow
+            nextEpisode();
+            break;
+          case 32: // space
+            e.preventDefault();
+            toggleLights();
+            break;
+          case 70: // f
+            toggleFullscreen();
+            break;
+        }
+      });
+
+      // Auto-hide loading on page load
+      $(window).on("load", function () {
+        setTimeout(hideLoading, 1000);
+      });
+    </script>
+  </body>
+</html>
