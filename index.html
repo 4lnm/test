@@ -585,6 +585,36 @@
           }
         });
       });
+
+      // Demo functions for interactive elements
+      function showMessage(section) {
+        alert(
+          `This is a demo! The ${section} section would normally show content here.`,
+        );
+      }
+
+      function showAnime(animeName) {
+        alert(
+          `This is a demo! Normally this would take you to the ${animeName} anime page with episodes and details.`,
+        );
+      }
+
+      function searchForAnime(animeName) {
+        alert(
+          `This is a demo! Normally this would search for "${animeName}" and show results.`,
+        );
+      }
+
+      function searchAnime(event) {
+        event.preventDefault();
+        const searchTerm = $(".search-input").val().trim();
+        if (searchTerm) {
+          alert(
+            `This is a demo! Normally this would search for "${searchTerm}" and show results.`,
+          );
+        }
+        return false;
+      }
     </script>
   </body>
 </html>
