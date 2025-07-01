@@ -4,38 +4,67 @@ require('./_config.php');
 $id = $_GET['id'];
 $quality = isset($_GET['quality']) ? $_GET['quality'] : 'auto';
 
-// Fetch video sources from GogoAnime API
-$json = file_get_contents("$api/vidcdn/watch/$id");
-$video = json_decode($json, true);
+// Try to fetch video sources from GogoAnime API
+$video_sources = [];
+$anime_info = null;
 
-$json1 = file_get_contents("$api/getEpisode/$id");
-$anime = json_decode($json1, true);
+// Primary API call - vidcdn
+$json = @file_get_contents("$api/vidcdn/watch/$id");
+if ($json) {
+    $video = json_decode($json, true);
+    if (isset($video['sources']) && !empty($video['sources'])) {
+        $video_sources = array_merge($video_sources, $video['sources']);
+    }
+}
 
-if (isset($video['sources']) && !empty($video['sources'])) {
+// Backup API call - try alternative endpoint
+if (empty($video_sources)) {
+    $json_backup = @file_get_contents("$api/anime-details/$id");
+    if ($json_backup) {
+        $video_backup = json_decode($json_backup, true);
+        if (isset($video_backup['video']) && !empty($video_backup['video'])) {
+            $video_sources[] = ['file' => $video_backup['video'], 'quality' => 'auto'];
+        }
+    }
+}
+
+// Get episode info
+$json1 = @file_get_contents("$api/getEpisode/$id");
+if ($json1) {
+    $anime_info = json_decode($json1, true);
+}
+
+if (!empty($video_sources)) {
     // Select quality based on user preference
     $selected_source = null;
 
     if ($quality === 'auto' || $quality === '1080p') {
         // Use highest quality available
-        $selected_source = $video['sources'][count($video['sources']) - 1];
+        $selected_source = $video_sources[count($video_sources) - 1];
     } else {
         // Find specific quality or fallback to highest
-        foreach ($video['sources'] as $source) {
-            if (isset($source['quality']) && $source['quality'] === $quality) {
+        foreach ($video_sources as $source) {
+            if (isset($source['quality']) && strpos($source['quality'], $quality) !== false) {
                 $selected_source = $source;
                 break;
             }
         }
         // Fallback to highest quality if requested quality not found
         if (!$selected_source) {
-            $selected_source = $video['sources'][count($video['sources']) - 1];
+            $selected_source = $video_sources[count($video_sources) - 1];
         }
     }
 
     $original_m3u8_url = $selected_source['file'];
-    $m3u8_url = 'https://goodproxy.eren-yeager-founding-titan-9.workers.dev/fetch?url=' . urlencode($original_m3u8_url);
+
+    // Use proxy if needed for CORS
+    if (strpos($original_m3u8_url, '.m3u8') !== false) {
+        $m3u8_url = 'https://goodproxy.eren-yeager-founding-titan-9.workers.dev/fetch?url=' . urlencode($original_m3u8_url);
+    } else {
+        $m3u8_url = $original_m3u8_url;
+    }
 } else {
-    echo "Error: Video sources not available. GogoAnime may be temporarily unavailable.";
+    echo "Error: Video sources not available. GogoAnime may be temporarily unavailable. Please try refreshing the page or contact support.";
     exit;
 }
 ?>
