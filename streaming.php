@@ -199,7 +199,7 @@ var site_config = {
                                         </div>
 
 
-                                        <iframe src="https://player.animezia.net/?id=<?=$url?>" name="iframe-to-load" frameborder="0"
+                                        <iframe src="<?=$websiteUrl?>/player/?id=<?=$url?>" name="iframe-to-load" frameborder="0"
                                             scrolling="no"
                                             allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture"
                                             allowfullscreen="true" webkitallowfullscreen="true"
