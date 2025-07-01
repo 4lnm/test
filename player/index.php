@@ -64,7 +64,34 @@ if (!empty($video_sources)) {
         $m3u8_url = $original_m3u8_url;
     }
 } else {
-    echo "Error: Video sources not available. GogoAnime may be temporarily unavailable. Please try refreshing the page or contact support.";
+    // Show user-friendly error page
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Video Unavailable</title>
+        <style>
+            body { font-family: Arial, sans-serif; padding: 50px; text-align: center; background: #000; color: #fff; }
+            .error-container { max-width: 500px; margin: 0 auto; }
+            .retry-btn { background: #673DE6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; }
+            .retry-btn:hover { background: #553BC4; }
+        </style>
+    </head>
+    <body>
+        <div class="error-container">
+            <h2>Video Temporarily Unavailable</h2>
+            <p>The video source is currently unavailable. This may be due to:</p>
+            <ul style="text-align: left;">
+                <li>Server maintenance</li>
+                <li>Temporary network issues</li>
+                <li>High traffic</li>
+            </ul>
+            <button class="retry-btn" onclick="window.location.reload()">Retry</button>
+            <button class="retry-btn" onclick="window.parent.location.reload()">Reload Page</button>
+        </div>
+    </body>
+    </html>';
     exit;
 }
 ?>
