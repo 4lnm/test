@@ -1,0 +1,12 @@
+{
+  "name": "anime-website",
+  "version": "1.0.0",
+  "description": "Anime streaming website",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
