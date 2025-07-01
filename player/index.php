@@ -124,7 +124,7 @@ if (!$m3u8_url) {
             title: "",
             description: "",
             image: "",
-             sources: [{"file": `<?php echo $m3u8_url; ?>`}],
+             sources: [{"file": `<?php echo $m3u8_url; ?>`, "type": "hls"}],
         }],
         advertising: {
             client: "vast",
