@@ -266,18 +266,18 @@ var site_config = {
                                             <div class="ps__-list">
                                                 <div class="item">
                                                     <a id="server1"
-                                                        href="https://player.animezia.net/?id=<?=$url?>"
-                                                        target="iframe-to-load" class="btn btn-server active">AnimeZia</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>"
+                                                        target="iframe-to-load" class="btn btn-server active">GogoAnime HD</a>
                                                 </div>
                                                 <div class="item">
                                                     <a id="server2"
-                                                        href="https://player.animezia.net/?id=<?=$url?>"
-                                                        target="iframe-to-load" class="btn btn-server">AnimeZia V2</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>&quality=720p"
+                                                        target="iframe-to-load" class="btn btn-server">GogoAnime 720p</a>
                                                 </div>
                                                 <div class="item">
                                                     <a id="server3"
-                                                        href="<?=$getEpisode['video']?>"
-                                                        target="iframe-to-load" class="btn btn-server">GogoServer</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>&quality=480p"
+                                                        target="iframe-to-load" class="btn btn-server">GogoAnime 480p</a>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
