@@ -13,7 +13,8 @@ $m3u8_url = $gogo->getBestVideoUrl($id, $quality);
 
 // Get episode info for metadata
 $anime_info = $gogo->getEpisodeData($id);
-} else {
+// Check if we have a valid video URL
+if (!$m3u8_url) {
     // Show user-friendly error page
     echo '<!DOCTYPE html>
     <html lang="en">
@@ -33,10 +34,12 @@ $anime_info = $gogo->getEpisodeData($id);
             <h2>Video Temporarily Unavailable</h2>
             <p>The video source is currently unavailable. This may be due to:</p>
             <ul style="text-align: left;">
-                <li>Server maintenance</li>
+                <li>GogoAnime server maintenance</li>
                 <li>Temporary network issues</li>
-                <li>High traffic</li>
+                <li>High traffic or rate limiting</li>
+                <li>Episode not yet available</li>
             </ul>
+            <p><strong>Episode ID:</strong> ' . htmlspecialchars($id) . '</p>
             <button class="retry-btn" onclick="window.location.reload()">Retry</button>
             <button class="retry-btn" onclick="window.parent.location.reload()">Reload Page</button>
         </div>
