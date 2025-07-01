@@ -1,11 +1,11 @@
-<?php 
+<?php
 require('./_config.php');
 session_start();
 
 
 
 
-$parts=parse_url($_SERVER['REQUEST_URI']); 
+$parts=parse_url($_SERVER['REQUEST_URI']);
 $page_url=explode('/', $parts['path']);
 $url = $page_url[count($page_url)-1];
 //$url = "naruto-episode-2";
@@ -21,29 +21,45 @@ else{
     $dub = "sub";
 };
 
-$getEpisode = file_get_contents("$api/getEpisode/$url");
-$getEpisode = json_decode($getEpisode, true);
-if(isset($getEpisode['error'])){
-    header('Location: /');
-};
+$getEpisode = @file_get_contents("$api/getEpisode/$url");
+if ($getEpisode) {
+    $getEpisode = json_decode($getEpisode, true);
+    if(isset($getEpisode['error']) || !$getEpisode){
+        header('Location: /');
+        exit;
+    }
+} else {
+    // Fallback - create basic episode structure
+    $getEpisode = [
+        'animeNameWithEP' => 'Episode not found',
+        'ep_num' => '1',
+        'ep_download' => '',
+        'anime_info' => $animeID,
+        'video' => '',
+        'prevEpText' => '',
+        'nextEpText' => '',
+        'prevEpLink' => '',
+        'nextEpLink' => ''
+    ];
+}
 
 
 
 $pageID = $url;
 
-$CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
+$CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $pageUrl = $CurPageURL;
 
 //check for count
-$query = mysqli_query($conn, "SELECT * FROM `pageview` WHERE pageID = '$pageID'"); 
-$rows = mysqli_fetch_array($query); 
-$counter = $rows['totalview']; 
+$query = mysqli_query($conn, "SELECT * FROM `pageview` WHERE pageID = '$pageID'");
+$rows = mysqli_fetch_array($query);
+$counter = $rows['totalview'];
 
-$id = $rows['id']; 
-if(empty($counter)) 
+$id = $rows['id'];
+if(empty($counter))
 {
  $counter = 1;
- mysqli_query($conn,"INSERT INTO `pageview` (pageID,totalview,like_count,dislike_count,animeID) VALUES('$pageID','$counter','1','0','$animeID')"); 
+ mysqli_query($conn,"INSERT INTO `pageview` (pageID,totalview,like_count,dislike_count,animeID) VALUES('$pageID','$counter','1','0','$animeID')");
  header('Location: //'.$pageUrl);
 };
 
@@ -59,25 +75,24 @@ parse_str($streamingID['query'], $streamingPID);
 $streamingID = $streamingPID['id'];
 $animeTitle = $streamingPID['title'];
 
-$getAnime = file_get_contents("$api/getAnime/$anime");
-$getAnime = json_decode($getAnime, true);
+$getAnime = @file_get_contents("$api/anime-details/$anime");
+if ($getAnime) {
+    $getAnime = json_decode($getAnime, true);
+} else {
+    // Fallback for anime details
+    $getAnime = [
+        'name' => 'Unknown Anime',
+        'imageUrl' => '/files/images/placeholder.jpg',
+        'type' => 'TV',
+        'status' => 'Unknown',
+        'released' => 'Unknown',
+        'othername' => '',
+        'synopsis' => 'Anime details not available at the moment.',
+        'episode_id' => []
+    ];
+}
 
 $animeSearch = trim($anime,"-dub");
-
-
-$api_url = "$api/getepisode/$id";
-
-// Fetch the JSON response from the API and store it in $json2
-$json2 = file_get_contents($api_url);
-
-// Decode the JSON into an array
-$data2 = json_decode($json2, true);
-
-// Extract necessary information
-$animeNameWithEP2 = $data2['animeNameWithEP'];
-
-// Replace spaces with hyphens in the anime name
-$animeNameWithEP2 = str_replace(' ', '-', $animeNameWithEP2);
 
 $episodelist = $getAnime['episode_id'];
 $firstEpID =  $episodelist[0];
@@ -93,28 +108,28 @@ $ANIME_TYPE = $getAnime['type'];
 //increase counters by 1 on page load
 $counter = $counter+1;
 mysqli_query($conn,"UPDATE `pageview` SET totalview ='$counter' WHERE pageID = '$pageID'");
-$like_count = $rows['like_count']; 
-$dislike_count = $rows['dislike_count']; 
+$like_count = $rows['like_count'];
+$dislike_count = $rows['dislike_count'];
 $totalVotes = $like_count + $dislike_count;
 
 if(isset($_COOKIE['userID'])){
     $userID = $_COOKIE['userID'];
 
-    $user_history = mysqli_query($conn, "SELECT * FROM `user_history` WHERE (user_id,anime_id) = ('$userID', '$url')"); 
-    $user_history = mysqli_fetch_assoc($user_history); 
+    $user_history = mysqli_query($conn, "SELECT * FROM `user_history` WHERE (user_id,anime_id) = ('$userID', '$url')");
+    $user_history = mysqli_fetch_assoc($user_history);
     $user_history_anime_id = $user_history['anime_id'];
     $user_history_id = $user_history['id'];
     //echo  $user_history_id ;
 
     if(empty($user_history_anime_id)){
         mysqli_query($conn,"INSERT INTO `user_history` (user_id,anime_id,anime_title,anime_ep,anime_image,anime_release,dubOrSub,anime_type)
-        VALUES('$userID','$url','$ANIME_name','$EPISODE_NUMBER','$ANIME_IMAGE','$ANIME_RELEASED','$dub','$ANIME_TYPE')"); 
+        VALUES('$userID','$url','$ANIME_name','$EPISODE_NUMBER','$ANIME_IMAGE','$ANIME_RELEASED','$dub','$ANIME_TYPE')");
     }elseif($user_history_anime_id == $url){
-        mysqli_query($conn,"DELETE FROM `user_history` WHERE id = '$user_history_id'"); 
+        mysqli_query($conn,"DELETE FROM `user_history` WHERE id = '$user_history_id'");
         mysqli_query($conn,"INSERT INTO `user_history` (user_id,anime_id,anime_title,anime_ep,anime_image,anime_release,dubOrSub,anime_type)
-        VALUES('$userID','$url','$ANIME_name','$EPISODE_NUMBER','$ANIME_IMAGE','$ANIME_RELEASED','$dub','$ANIME_TYPE')"); 
+        VALUES('$userID','$url','$ANIME_name','$EPISODE_NUMBER','$ANIME_IMAGE','$ANIME_RELEASED','$dub','$ANIME_TYPE')");
     }
-   
+
 }
 ?>
 <!DOCTYPE html>
@@ -125,10 +140,10 @@ if(isset($_COOKIE['userID'])){
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="shortcut icon" href="/favicon.ico">
-  
 
-    
-  
+
+
+
   <title>Watch <?=$getEpisode['animeNameWithEP']?> on AnimeZia | Chromecast Available</title>
   <meta name="robots" content="index, follow" />
   <meta name="description" content="Watch <?=$getEpisode['animeNameWithEP']?> on Ryuk" />
@@ -214,7 +229,7 @@ var site_config = {
                                         </div>
 
 
-                                        <iframe src="https://player.animezia.net/?id=<?=$url?>" name="iframe-to-load" frameborder="0"
+                                        <iframe src="<?=$websiteUrl?>/player/?id=<?=$url?>" name="iframe-to-load" frameborder="0"
                                             scrolling="no"
                                             allow="accelerometer;autoplay;encrypted-media;gyroscope;picture-in-picture"
                                             allowfullscreen="true" webkitallowfullscreen="true"
@@ -228,14 +243,14 @@ var site_config = {
                                         <div class="pc-item pc-toggle pc-light">
                                             <div id="turn-off-light" class="toggle-basic">
                                                 <span class="tb-name"><i class="fas fa-lightbulb mr-2"></i>Light</span>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="pc-item pc-download">
                                             <a class="btn btn-sm pc-download" href="https://animezia.net/download.php?id=<?php echo $url;  ?>" target="_blank"><i
                                                     class="fas fa-download mr-2"></i>Download</a>
                                         </div>
-                                        
+
                                         <div class="pc-right">
                                             <?php if($getEpisode['prevEpText'] == "") {
                                             echo "";
@@ -281,18 +296,18 @@ var site_config = {
                                             <div class="ps__-list">
                                                 <div class="item">
                                                     <a id="server1"
-                                                        href="https://player.animezia.net/?id=<?=$url?>"
-                                                        target="iframe-to-load" class="btn btn-server active">AnimeZia</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>"
+                                                        target="iframe-to-load" class="btn btn-server active">GogoAnime HD</a>
                                                 </div>
                                                 <div class="item">
                                                     <a id="server2"
-                                                        href="https://player.animezia.net/?id=<?=$url?>"
-                                                        target="iframe-to-load" class="btn btn-server">AnimeZia V2</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>&quality=720p"
+                                                        target="iframe-to-load" class="btn btn-server">GogoAnime 720p</a>
                                                 </div>
                                                 <div class="item">
                                                     <a id="server3"
-                                                        href="<?=$getEpisode['video']?>"
-                                                        target="iframe-to-load" class="btn btn-server">GogoServer</a>
+                                                        href="<?=$websiteUrl?>/player/?id=<?=$url?>&quality=480p"
+                                                        target="iframe-to-load" class="btn btn-server">GogoAnime 480p</a>
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -321,7 +336,7 @@ var site_config = {
                                                 <div id="episodes-page-1" class="ss-list ss-list-min" data-page="1"
                                                     style="display:block;">
 
-                                                    <?php 
+                                                    <?php
                                                     foreach ($episodelist as $episodelist) {  ?>
                                                     <a data-number="<?=$episodelist['episodeNum']?>"
                                                         id="<?=$episodelist['episodeNum']?>"
@@ -388,22 +403,22 @@ var site_config = {
                                             <div class="text"><?=$getAnime['synopsis']?></div>
                                         </div>
                                         <div class="film-text m-hide mb-3">
-                                           
+
                                         </div>
                                         <div class="block"><a href="/anime/<?=$anime?>" class="btn btn-xs btn-light"><i
                                                     class="fas fa-book-open mr-2"></i> View detail</a></div>
 
 
                                         <?php
-                                        $likeClass="far";	
+                                        $likeClass="far";
 			                            if(isset($_COOKIE['like_'.$id])){
 			                            	$likeClass="fas";
-			                            }		
-                            
-			                            $dislikeClass="far";	
+			                            }
+
+			                            $dislikeClass="far";
 			                            if(isset($_COOKIE['dislike_'.$id])){
 			                            	$dislikeClass="fas";
-			                            }	
+			                            }
                                         ?>
                                         <div class="dt-rate">
                                             <div id="vote-info">
@@ -412,7 +427,7 @@ var site_config = {
                                                         <div class="rr-mark float-left">
                                                             <strong><i class="fas fa-star text-warning mr-2"></i><span
                                                                     id="ratingAnime"><?=round((10*$like_count + 5*$dislike_count)/($like_count+$dislike_count),2)?></span></strong>
-                                                            <small id="votedCount">(<?php 
+                                                            <small id="votedCount">(<?php
                                                                 if(isset($totalVotes)){
                                                                 echo $totalVotes;
                                                                 }?> Voted)</small>
