@@ -127,8 +127,8 @@ if (!empty($video_sources)) {
         controls: true,
         displaytitle: true,
         displaydescription: true,
-        abouttext: "Zoro",
-        aboutlink: "<?=$websiteUrl?>",
+        abouttext: "<?=$websiteTitle?>",
+        aboutlink: "<?=isset($websiteUrl) ? $websiteUrl : '//'.$_SERVER['HTTP_HOST']?>",
         autostart: true,
         skin: {
             name: "netflix"
