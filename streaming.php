@@ -75,8 +75,22 @@ parse_str($streamingID['query'], $streamingPID);
 $streamingID = $streamingPID['id'];
 $animeTitle = $streamingPID['title'];
 
-$getAnime = file_get_contents("$api/anime-details/$anime");
-$getAnime = json_decode($getAnime, true);
+$getAnime = @file_get_contents("$api/anime-details/$anime");
+if ($getAnime) {
+    $getAnime = json_decode($getAnime, true);
+} else {
+    // Fallback for anime details
+    $getAnime = [
+        'name' => 'Unknown Anime',
+        'imageUrl' => '/files/images/placeholder.jpg',
+        'type' => 'TV',
+        'status' => 'Unknown',
+        'released' => 'Unknown',
+        'othername' => '',
+        'synopsis' => 'Anime details not available at the moment.',
+        'episode_id' => []
+    ];
+}
 
 $animeSearch = trim($anime,"-dub");
 
